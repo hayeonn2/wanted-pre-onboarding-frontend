@@ -4,11 +4,14 @@ import { Home } from "./pages/Home";
 import { SignUp } from "./pages/SignUp";
 import { SignIn } from "./pages/SignIn";
 import { ToDoList } from "./pages/ToDoList";
+import NavBar from "./components/NavBar";
+import "./index.css";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
