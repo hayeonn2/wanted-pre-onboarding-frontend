@@ -1,5 +1,23 @@
-import React from "react";
+const SignIn = () => {
+  return (
+    <div>
+      <label htmlFor="email">이메일</label>
+      <input
+        id="email"
+        data-testid="email-input"
+        placeholder="이메일을 입력해주세요"
+      />
 
-export const SignIn = () => {
-  return <div>로그인</div>;
+      <label htmlFor="password">비밀번호</label>
+      <input
+        id="password"
+        data-testid="password-input"
+        placeholder="비밀번호를 입력해주세요"
+      />
+
+      <button data-testid="signin-button">로그인</button>
+    </div>
+  );
 };
+
+export default SignIn;

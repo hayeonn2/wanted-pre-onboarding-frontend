@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NotFound } from "./pages/NotFound";
 import { Home } from "./pages/Home";
 import SignUp from "./pages/SignUp";
-import { SignIn } from "./pages/SignIn";
+import SignIn from "./pages/SignIn";
 import { ToDoList } from "./pages/ToDoList";
 import NavBar from "./components/NavBar";
 //import "./index.css";
