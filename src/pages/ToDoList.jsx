@@ -1,5 +1,5 @@
-import React from "react";
-
-export const ToDoList = () => {
+const ToDoList = () => {
   return <div>투두리스트</div>;
 };
+
+export default ToDoList;
