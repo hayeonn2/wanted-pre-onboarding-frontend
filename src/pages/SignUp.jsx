@@ -28,6 +28,7 @@ const SignUp = () => {
   };
 
   const onSubmit = async (e) => {
+    e.preventDefault();
     const user = {
       email,
       password,
@@ -37,7 +38,7 @@ const SignUp = () => {
   };
 
   return (
-    <div>
+    <form onSubmit={onSubmit}>
       <label htmlFor="email">이메일</label>
       <input
         type="email"
@@ -59,14 +60,12 @@ const SignUp = () => {
       />
 
       <button
-        type="submit"
         data-testid="signup-button"
         disabled={!(validEmail && validPassword)}
-        onClick={onSubmit}
       >
         회원가입
       </button>
-    </div>
+    </form>
   );
 };
 
