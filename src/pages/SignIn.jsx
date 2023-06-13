@@ -1,13 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
-
-const url = "http://localhost:8000/";
-const api = axios.create({
-  baseURL: url,
-  Headers: {
-    "Content-Type": "application/json",
-  },
-});
+import { signIn } from "../api/auth";
 
 const SignIn = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -35,19 +27,13 @@ const SignIn = () => {
     }
   };
 
-  const register = async () => {
-    await api
-      .post("/auth/signin", {
-        email,
-        password,
-      })
-      .then((res) => {
-        console.log(res);
-        const token = res.data.access_token;
-        localStorage.setItem("token", token);
-        window.location.replace("/todo");
-      })
-      .catch((err) => console.log(err));
+  const onSubmit = async (e) => {
+    const user = {
+      email,
+      password,
+    };
+
+    await signIn(user);
   };
 
   return (
@@ -76,7 +62,7 @@ const SignIn = () => {
         type="submit"
         data-testid="signin-button"
         disabled={!(validEmail && validPassword)}
-        onClick={register}
+        onClick={onSubmit}
       >
         로그인
       </button>

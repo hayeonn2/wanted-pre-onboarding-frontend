@@ -1,14 +1,5 @@
-import React, { useState } from "react";
-import axios from "axios";
-
-// const url = "https://www.pre-onboarding-selection-task.shop/";
-const url = "http://localhost:8000/";
-const api = axios.create({
-  baseURL: url,
-  Headers: {
-    "Content-Type": "application/json",
-  },
-});
+import { useState } from "react";
+import { signUp } from "../api/auth";
 
 const SignUp = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -36,17 +27,13 @@ const SignUp = () => {
     }
   };
 
-  const register = async () => {
-    await api
-      .post("/auth/signup", {
-        email,
-        password,
-      })
-      .then((res) => {
-        console.log(res);
-        window.location.replace("/signin");
-      })
-      .catch((err) => console.log(err));
+  const onSubmit = async (e) => {
+    const user = {
+      email,
+      password,
+    };
+
+    await signUp(user);
   };
 
   return (
@@ -75,7 +62,7 @@ const SignUp = () => {
         type="submit"
         data-testid="signup-button"
         disabled={!(validEmail && validPassword)}
-        onClick={register}
+        onClick={onSubmit}
       >
         회원가입
       </button>
