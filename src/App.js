@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import NavBar from "./components/NavBar";
-import ToDoList from "./pages/ToDoList";
+import ToDo from "./pages/ToDo";
 import NotFound from "./pages/NotFound";
 //import "./index.css";
 
@@ -26,7 +26,7 @@ function App() {
           />
           <Route
             path="/todo"
-            element={!token ? <Navigate to="/signin" /> : <ToDoList />}
+            element={!token ? <Navigate to="/signin" /> : <ToDo />}
           />
           <Route path="/*" element={<NotFound />} />
         </Routes>
