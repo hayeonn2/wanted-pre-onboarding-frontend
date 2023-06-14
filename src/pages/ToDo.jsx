@@ -11,7 +11,6 @@ const ToDo = () => {
     setTodoList([...todoList, todo]);
     setTodo("");
     console.log("Add todo: " + todo);
-    console.log("todoId: " + todo.id);
   };
   return (
     <div>
@@ -24,8 +23,14 @@ const ToDo = () => {
         }}
       />
       <ul>
-        {todoList.map((todo, id) => (
-          <TodoItem key={id} todo={todo} />
+        {todoList.map((todo, idx) => (
+          <TodoItem
+            key={idx}
+            index={idx}
+            todo={todo}
+            todoList={todoList}
+            setTodoList={setTodoList}
+          />
         ))}
       </ul>
     </div>
