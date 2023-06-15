@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export const AddToDoForm = ({ onSubmit, onChange, todo }) => {
   return (
     <form onSubmit={onSubmit}>
