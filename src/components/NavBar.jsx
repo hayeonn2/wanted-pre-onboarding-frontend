@@ -5,11 +5,6 @@ export default function NavBar() {
     <nav className="flex justify-center items-center">
       <ul className="flex flex-row my-8">
         <li>
-          <Link to="/" className="ml-8 hover:text-blue-500">
-            Home
-          </Link>
-        </li>
-        <li>
           <Link to="/signin" className="ml-8 hover:text-blue-500">
             LogIn
           </Link>

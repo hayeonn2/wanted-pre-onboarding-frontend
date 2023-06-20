@@ -3,28 +3,19 @@ import { updateTodo } from "../api/todo";
 
 export default function TodoItem({
   todo,
-  onDelete,
+  removeTodo,
   getTodo,
   isChecked,
   ...restProps
 }) {
-  // const { onDelete } = { ...restProps };
   const [edited, setEdited] = useState(false);
   const [newTodo, setNewTodo] = useState(todo.todo);
 
   const editTodo = async () => {
-    try {
-      await updateTodo(todo.id, newTodo, todo.isCompleted);
-      await getTodo();
-      setEdited(false);
-    } catch (err) {
-      console.log(err);
-    }
+    await updateTodo(todo.id, newTodo, todo.isCompleted);
+    await getTodo();
+    setEdited(false);
   };
-
-  // useEffect(() => {
-  //   console.log("todo.id: " + todo);
-  // });
 
   return (
     <>
@@ -39,14 +30,13 @@ export default function TodoItem({
           <button data-testid="modify-button" onClick={() => setEdited(true)}>
             수정
           </button>
-          <button data-testid="delete-button" onClick={() => onDelete(todo.id)}>
+          <button data-testid="delete-button" onClick={() => removeTodo(todo)}>
             삭제
           </button>
         </label>
       ) : (
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
+          onSubmit={() => {
             editTodo();
           }}
         >

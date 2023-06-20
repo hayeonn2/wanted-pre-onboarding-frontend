@@ -24,7 +24,7 @@ export const createTodo = async (newTodo) => {
 };
 
 export const deleteTodo = async (id) => {
-  const response = await api.post(`todos/${id}`);
+  const response = await api.delete(`todos/${id}`);
   return response;
 };
 

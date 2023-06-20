@@ -12,7 +12,7 @@ export const AddToDoForm = ({ onSubmit, todo, onChange }) => {
         onChange={onChange}
         placeholder="할일을 입력하세요"
       />
-      <button data-testid="new-todo-add-button" type="button">
+      <button data-testid="new-todo-add-button" type="submit">
         추가
       </button>
     </form>

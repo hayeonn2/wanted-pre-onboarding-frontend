@@ -1,6 +1,6 @@
-import { AddToDoForm } from "../components/AddToDoForm";
 import { useEffect, useState } from "react";
 import TodoItem from "../components/TodoItem";
+import { AddToDoForm } from "../components/AddToDoForm";
 import { createTodo, deleteTodo, fetchTodo, updateTodo } from "../api/todo";
 
 const ToDo = () => {
@@ -15,21 +15,17 @@ const ToDo = () => {
   const getTodo = async () => {
     const response = await fetchTodo();
     setTodoList(response.data);
-    console.log(response);
+    console.log(response.data);
   };
 
-  const onDelete = async (id) => {
-    await deleteTodo(id);
+  const removeTodo = async (todo) => {
+    await deleteTodo(todo.id);
     getTodo();
   };
 
   const isChecked = async (todo) => {
-    try {
-      await updateTodo(todo.id, todo.todo, !todo.isCompleted);
-      getTodo();
-    } catch (err) {
-      console.log(err);
-    }
+    await updateTodo(todo.id, todo.todo, !todo.isCompleted);
+    getTodo();
   };
 
   useEffect(() => {
@@ -50,7 +46,7 @@ const ToDo = () => {
           <li key={todo.id}>
             <TodoItem
               todo={todo}
-              onDelete={onDelete}
+              removeTodo={removeTodo}
               getTodo={getTodo}
               isChecked={isChecked}
             />
