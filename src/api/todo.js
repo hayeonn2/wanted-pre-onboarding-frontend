@@ -10,10 +10,11 @@ const api = axios.create({
   },
 });
 
-export const createTodo = async ({ todo }) => {
+export const createTodo = async (newTodo) => {
   await api
     .post("/todos", {
-      todo: todo,
+      todo: newTodo,
+      isCompleted: false,
     })
     .then((res) => {
       console.log(res);
@@ -30,7 +31,7 @@ export const updateTodo = async (todoId, newTodo, todoIsCompleted) => {
       isCompleted: todoIsCompleted,
     })
     .then((res) => {
-      console.log(res);
+      console.log(res.data);
     })
     .catch((err) => {
       console.log(err);

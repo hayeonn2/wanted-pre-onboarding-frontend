@@ -1,7 +1,7 @@
 import { AddToDoForm } from "../components/AddToDoForm";
 import { useEffect, useState } from "react";
 import TodoItem from "../components/TodoItem";
-import { createTodo } from "../api/todo";
+import { createTodo, updateTodo } from "../api/todo";
 import axios from "axios";
 import { BASE_URL } from "../api/api";
 
@@ -28,6 +28,7 @@ const ToDo = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTodoList(result.data);
+      console.log(result.data);
     } catch (err) {
       console.error(err);
     }
@@ -46,6 +47,15 @@ const ToDo = () => {
     }
   };
 
+  const isChecked = async (todo) => {
+    try {
+      await updateTodo(todo.id, todo.todo, !todo.isCompleted);
+      getTodo();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getTodo();
   }, []);
@@ -60,9 +70,14 @@ const ToDo = () => {
         }}
       />
       <ul>
-        {todoList.map((todo, index) => (
-          <li key={`${todo.id}`}>
-            <TodoItem todo={todo} onDelete={onDelete} getTodo={getTodo} />
+        {todoList.map((todo) => (
+          <li key={todo.id}>
+            <TodoItem
+              todo={todo}
+              onDelete={onDelete}
+              getTodo={getTodo}
+              isChecked={isChecked}
+            />
           </li>
         ))}
       </ul>

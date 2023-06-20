@@ -1,7 +1,13 @@
-import { useEffect, useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 import { updateTodo } from "../api/todo";
 
-export default function TodoItem({ todo, onDelete, getTodo, ...restProps }) {
+export default function TodoItem({
+  todo,
+  onDelete,
+  getTodo,
+  isChecked,
+  ...restProps
+}) {
   // const { onDelete } = { ...restProps };
   const [edited, setEdited] = useState(false);
   const [newTodo, setNewTodo] = useState(todo.todo);
@@ -21,10 +27,14 @@ export default function TodoItem({ todo, onDelete, getTodo, ...restProps }) {
   // });
 
   return (
-    <Fragment>
+    <>
       {!edited ? (
         <label>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked={todo.isCompleted}
+            onChange={() => isChecked(todo)}
+          />
           <span>{todo.todo}</span>
           <button data-testid="modify-button" onClick={() => setEdited(true)}>
             수정
@@ -57,6 +67,6 @@ export default function TodoItem({ todo, onDelete, getTodo, ...restProps }) {
           </button>
         </form>
       )}
-    </Fragment>
+    </>
   );
 }
