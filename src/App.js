@@ -4,7 +4,6 @@ import SignIn from "./pages/SignIn";
 import NavBar from "./components/NavBar";
 import ToDo from "./pages/ToDo";
 import NotFound from "./pages/NotFound";
-//import "./index.css";
 
 function App() {
   const token = localStorage.getItem("token");
