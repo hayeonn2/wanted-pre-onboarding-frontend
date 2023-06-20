@@ -10,13 +10,10 @@ const api = axios.create({
   },
 });
 
-export const createTodo = async ({ todo, todoList }) => {
+export const createTodo = async ({ todo }) => {
   await api
     .post("/todos", {
-      id: todoList.findIndex((item) => item === todo),
       todo: todo,
-      isComplete: false,
-      userId: token,
     })
     .then((res) => {
       console.log(res);
