@@ -1,40 +1,73 @@
 import { AddToDoForm } from "../components/AddToDoForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoItem from "../components/TodoItem";
 import { createTodo } from "../api/todo";
+import axios from "axios";
+import { BASE_URL } from "../api/api";
 
 const ToDo = () => {
-  const [todo, setTodo] = useState("");
+  const [todoInput, setTodoInput] = useState("");
   const [todoList, setTodoList] = useState([]);
 
   const addTodo = async (e) => {
-    e.preventDefault();
-    setTodoList([...todoList, todo]);
-    setTodo("");
+    // e.preventDefault();
+    // setTodoList([...todoList, todoInput]);
+    // setTodoInput("");
 
-    await createTodo({ todo, todoList });
-    console.log("Add todo: " + todo);
+    try {
+      await createTodo({
+        todo: todoInput,
+      });
+      await getTodo();
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  const token = localStorage.getItem("token");
+
+  const getTodo = async () => {
+    try {
+      const result = await axios.get(`${BASE_URL}todos`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setTodoList(result.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const onDelete = async (id) => {
+    console.log("todo: " + id);
+    try {
+      const result = await axios.delete(`${BASE_URL}todos/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log(result.data);
+      await getTodo();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getTodo();
+  }, []);
 
   return (
     <div>
-      <div>TODO</div>
       <AddToDoForm
         onSubmit={addTodo}
-        todo={todo}
+        todo={todoInput}
         onChange={(e) => {
-          setTodo(e.target.value);
+          setTodoInput(e.target.value);
         }}
       />
       <ul>
-        {todoList.map((todo, idx) => (
-          <TodoItem
-            key={idx}
-            index={idx}
-            todo={todo}
-            todoList={todoList}
-            setTodoList={setTodoList}
-          />
+        {todoList.map((todo, index) => (
+          <li key={`${todo.id}`}>
+            <TodoItem todo={todo} onDelete={onDelete} />
+          </li>
         ))}
       </ul>
     </div>
