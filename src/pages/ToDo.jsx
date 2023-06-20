@@ -1,50 +1,26 @@
 import { AddToDoForm } from "../components/AddToDoForm";
 import { useEffect, useState } from "react";
 import TodoItem from "../components/TodoItem";
-import { createTodo, updateTodo } from "../api/todo";
-import axios from "axios";
-import { BASE_URL } from "../api/api";
+import { createTodo, deleteTodo, fetchTodo, updateTodo } from "../api/todo";
 
 const ToDo = () => {
   const [todoInput, setTodoInput] = useState("");
   const [todoList, setTodoList] = useState([]);
 
   const addTodo = async () => {
-    try {
-      await createTodo({
-        todo: todoInput,
-      });
-      await getTodo();
-    } catch (err) {
-      console.log(err);
-    }
+    await createTodo(todoInput);
+    getTodo();
   };
 
-  const token = localStorage.getItem("token");
-
   const getTodo = async () => {
-    try {
-      const result = await axios.get(`${BASE_URL}todos`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setTodoList(result.data);
-      console.log(result.data);
-    } catch (err) {
-      console.error(err);
-    }
+    const response = await fetchTodo();
+    setTodoList(response.data);
+    console.log(response);
   };
 
   const onDelete = async (id) => {
-    console.log("todo: " + id);
-    try {
-      const result = await axios.delete(`${BASE_URL}todos/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      console.log(result.data);
-      await getTodo();
-    } catch (err) {
-      console.error(err);
-    }
+    await deleteTodo(id);
+    getTodo();
   };
 
   const isChecked = async (todo) => {

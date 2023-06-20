@@ -10,30 +10,28 @@ const api = axios.create({
   },
 });
 
+export const fetchTodo = async () => {
+  const response = await api.get("/todos");
+  return response;
+};
+
 export const createTodo = async (newTodo) => {
-  await api
-    .post("/todos", {
-      todo: newTodo,
-      isCompleted: false,
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const response = await api.post("/todos", {
+    todo: newTodo,
+    isCompleted: false,
+  });
+  return response;
+};
+
+export const deleteTodo = async (id) => {
+  const response = await api.post(`todos/${id}`);
+  return response;
 };
 
 export const updateTodo = async (todoId, newTodo, todoIsCompleted) => {
-  await api
-    .put(`/todos/${todoId}`, {
-      todo: newTodo,
-      isCompleted: todoIsCompleted,
-    })
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const response = await api.put(`/todos/${todoId}`, {
+    todo: newTodo,
+    isCompleted: todoIsCompleted,
+  });
+  return response;
 };
