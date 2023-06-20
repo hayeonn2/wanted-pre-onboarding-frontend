@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { signUp } from "../api/auth";
+import { useNavigate } from "react-router";
 
 const SignUp = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const isValidateEmail = (e) => {
     setEmail(e.target.value);
@@ -29,12 +31,11 @@ const SignUp = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const user = {
-      email,
-      password,
-    };
 
-    await signUp(user);
+    const response = await signUp(email, password);
+    if (response.status === 201) {
+      navigate("/signin");
+    }
   };
 
   return (

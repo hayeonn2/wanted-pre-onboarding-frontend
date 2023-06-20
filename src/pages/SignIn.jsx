@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { signIn } from "../api/auth";
+import { useNavigate } from "react-router";
 
 const SignIn = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const isValidateEmail = (e) => {
     setEmail(e.target.value);
@@ -29,12 +31,13 @@ const SignIn = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const user = {
-      email,
-      password,
-    };
 
-    await signIn(user);
+    const response = await signIn(email, password);
+    if (response.status === 200) {
+      const token = response.data.access_token;
+      window.localStorage.setItem("token", token);
+      navigate(0);
+    }
   };
 
   return (
@@ -62,6 +65,7 @@ const SignIn = () => {
       <button
         data-testid="signin-button"
         disabled={!(validEmail && validPassword)}
+        type="submit"
       >
         로그인
       </button>
