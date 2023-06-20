@@ -22,3 +22,17 @@ export const createTodo = async ({ todo }) => {
       console.log(err);
     });
 };
+
+export const updateTodo = async (todoId, newTodo, todoIsCompleted) => {
+  await api
+    .put(`/todos/${todoId}`, {
+      todo: newTodo,
+      isCompleted: todoIsCompleted,
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

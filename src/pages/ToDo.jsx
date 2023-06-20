@@ -9,11 +9,7 @@ const ToDo = () => {
   const [todoInput, setTodoInput] = useState("");
   const [todoList, setTodoList] = useState([]);
 
-  const addTodo = async (e) => {
-    // e.preventDefault();
-    // setTodoList([...todoList, todoInput]);
-    // setTodoInput("");
-
+  const addTodo = async () => {
     try {
       await createTodo({
         todo: todoInput,
@@ -66,7 +62,7 @@ const ToDo = () => {
       <ul>
         {todoList.map((todo, index) => (
           <li key={`${todo.id}`}>
-            <TodoItem todo={todo} onDelete={onDelete} />
+            <TodoItem todo={todo} onDelete={onDelete} getTodo={getTodo} />
           </li>
         ))}
       </ul>
