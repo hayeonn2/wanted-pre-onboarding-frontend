@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import NavBar from "./components/NavBar";
@@ -15,7 +14,10 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={token ? <Navigate to="/todo" /> : <SignIn />}
+          />
           <Route
             path="/signup"
             element={token ? <Navigate to="/todo" /> : <SignUp />}

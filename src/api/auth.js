@@ -8,31 +8,27 @@ const api = axios.create({
   },
 });
 
-export const signUp = async (user) => {
-  await api
-    .post("/auth/signup", user)
-    .then((res) => {
-      console.log(res);
-      window.location.replace("/signin");
-    })
-    .catch((err) => {
-      console.log(err);
-      alert(err.res?.data?.message);
+export const signUp = async (email, password) => {
+  try {
+    const response = await api.post("/auth/signup", {
+      email,
+      password,
     });
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-export const signIn = async (user) => {
-  await api
-    .post("/auth/signin", user)
-    .then((res) => {
-      console.log(res);
-      const token = res.data.access_token;
-      localStorage.clear();
-      localStorage.setItem("token", token);
-      window.location.replace("/todo");
-    })
-    .catch((err) => {
-      console.log(err);
-      alert(err.res?.data?.message);
+export const signIn = async (email, password) => {
+  try {
+    const response = await api.post("/auth/signin", {
+      email,
+      password,
     });
+    console.log(response);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
 };

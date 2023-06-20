@@ -1,6 +1,10 @@
 export const AddToDoForm = ({ onSubmit, todo, onChange }) => {
   return (
-    <form onSubmit={() => onSubmit(todo)}>
+    <form
+      onSubmit={() => {
+        onSubmit(todo);
+      }}
+    >
       <input
         data-testid="new-todo-input"
         type="text"
