@@ -1,11 +1,14 @@
 # 원티드 프리온보딩 프론트엔드 인턴십
 
-원티드 프리오놉딩 프론트엔드 인턴십 과제입니다.
+원티드 프리온보딩 프론트엔드 인턴십 과제입니다.
+
 </br>
 
 # 배포 URL
 
 https://hayeonn2-wanted-pre-onboarding.netlify.app/
+
+</br>
 
 # 설치 및 실행하기
 
