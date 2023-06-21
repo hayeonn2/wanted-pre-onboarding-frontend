@@ -2,6 +2,9 @@ import { useState } from "react";
 import { signUp } from "../api/auth";
 import { useNavigate } from "react-router";
 
+import styled from "styled-components";
+import SignForm from "../components/SignForm";
+
 const SignUp = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
@@ -39,9 +42,9 @@ const SignUp = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <SignForm onSubmit={onSubmit}>
       <label htmlFor="email">이메일</label>
-      <input
+      <Input
         type="email"
         id="email"
         data-testid="email-input"
@@ -51,7 +54,7 @@ const SignUp = () => {
       />
 
       <label htmlFor="password">비밀번호</label>
-      <input
+      <Input
         type="password"
         id="password"
         data-testid="password-input"
@@ -60,14 +63,34 @@ const SignUp = () => {
         value={password}
       />
 
-      <button
+      <Button
         data-testid="signup-button"
         disabled={!(validEmail && validPassword)}
       >
         회원가입
-      </button>
-    </form>
+      </Button>
+    </SignForm>
   );
 };
+
+const Form = styled.form`
+  /* background-color: pink; */
+  width: 300px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Input = styled.input`
+  margin: 5px 0 20px 0;
+  padding: 10px 8px;
+`;
+
+const Button = styled.button`
+  padding: 10px 0;
+  border: none;
+  border-radius: 3px;
+  background: #e9e9e9;
+`;
 
 export default SignUp;
