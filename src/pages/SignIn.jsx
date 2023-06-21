@@ -39,9 +39,9 @@ const SignIn = () => {
     try {
       const response = await signIn(email, password);
       if (response.status === 200) {
+        navigate(0);
         const token = response.data.access_token;
         window.localStorage.setItem("token", token);
-        navigate(0);
       }
     } catch {
       alert("입력된 정보가 존재하지 않습니다.");
