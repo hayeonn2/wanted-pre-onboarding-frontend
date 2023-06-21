@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { signUp } from "../api/auth";
 import { useNavigate } from "react-router";
-import styled from "styled-components";
 import SignTitle from "../components/SignTitle";
 import SignForm from "../components/SignForm";
 import SignInput from "../components/SignInput";
