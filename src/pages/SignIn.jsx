@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { signIn } from "../api/auth";
 import { useNavigate } from "react-router";
+import SignTitle from "../components/SignTitle";
 import SignForm from "../components/SignForm";
 import SignInput from "../components/SignInput";
 import SignButton from "../components/SignButton";
@@ -49,6 +50,7 @@ const SignIn = () => {
 
   return (
     <SignForm onSubmit={onSubmit}>
+      <SignTitle>로그인</SignTitle>
       <label htmlFor="email">이메일</label>
       <SignInput
         type="email"
@@ -79,25 +81,5 @@ const SignIn = () => {
     </SignForm>
   );
 };
-
-// const Form = styled.form`
-//   /* background-color: pink; */
-//   width: 300px;
-//   margin: 50px auto;
-//   display: flex;
-//   flex-direction: column;
-// `;
-
-// const Input = styled.input`
-//   margin: 5px 0 20px 0;
-//   padding: 10px 8px;
-// `;
-
-// const Button = styled.button`
-//   padding: 10px 0;
-//   border: none;
-//   border-radius: 3px;
-//   background: #e9e9e9;
-// `;
 
 export default SignIn;
