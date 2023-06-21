@@ -14,7 +14,7 @@ export default function TodoItem({
 
   const editTodo = async () => {
     await updateTodo(todo.id, newTodo, todo.isCompleted);
-    await getTodo();
+    getTodo();
     setEdited(false);
   };
 
@@ -43,7 +43,8 @@ export default function TodoItem({
         </TodoInput>
       ) : (
         <TodoForm
-          onSubmit={() => {
+          onSubmit={(e) => {
+            e.preventDefault();
             editTodo();
           }}
         >
