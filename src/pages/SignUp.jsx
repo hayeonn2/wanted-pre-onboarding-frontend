@@ -36,10 +36,14 @@ const SignUp = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    const response = await signUp(email, password);
-    if (response.status === 201) {
-      navigate("/signin");
+    try {
+      const response = await signUp(email, password);
+      if (response.status === 201) {
+        navigate("/signin");
+      }
+    } catch (err) {
+      console.log(err);
+      alert("이미 존재하는 사용자 입니다.");
     }
   };
 
