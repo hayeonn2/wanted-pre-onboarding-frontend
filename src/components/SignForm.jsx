@@ -8,5 +8,5 @@ const Form = styled.form`
 `;
 
 export default function SignForm({ children, ...restProps }) {
-  return <Form>{children}</Form>;
+  return <Form {...restProps}>{children}</Form>;
 }

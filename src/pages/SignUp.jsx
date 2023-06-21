@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { signUp } from "../api/auth";
 import { useNavigate } from "react-router";
-
-import styled from "styled-components";
 import SignForm from "../components/SignForm";
+import SignInput from "../components/SignInput";
+import SignButton from "../components/SignButton";
 
 const SignUp = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -44,7 +44,7 @@ const SignUp = () => {
   return (
     <SignForm onSubmit={onSubmit}>
       <label htmlFor="email">이메일</label>
-      <Input
+      <SignInput
         type="email"
         id="email"
         data-testid="email-input"
@@ -54,7 +54,7 @@ const SignUp = () => {
       />
 
       <label htmlFor="password">비밀번호</label>
-      <Input
+      <SignInput
         type="password"
         id="password"
         data-testid="password-input"
@@ -63,34 +63,14 @@ const SignUp = () => {
         value={password}
       />
 
-      <Button
+      <SignButton
         data-testid="signup-button"
         disabled={!(validEmail && validPassword)}
       >
         회원가입
-      </Button>
+      </SignButton>
     </SignForm>
   );
 };
-
-const Form = styled.form`
-  /* background-color: pink; */
-  width: 300px;
-  margin: 50px auto;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Input = styled.input`
-  margin: 5px 0 20px 0;
-  padding: 10px 8px;
-`;
-
-const Button = styled.button`
-  padding: 10px 0;
-  border: none;
-  border-radius: 3px;
-  background: #e9e9e9;
-`;
 
 export default SignUp;
